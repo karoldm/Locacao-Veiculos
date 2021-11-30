@@ -15,7 +15,7 @@ public abstract class Veiculo {
     protected String categoria;
     protected float valorFipe;
     protected float valorDiaria;
-    protected Boolean alugado;
+    protected boolean alugado;
     
     public Veiculo(int codigoVeiculo, 
             String nomeModelo, 
@@ -26,7 +26,7 @@ public abstract class Veiculo {
             String categoria,
             float valorFipe,
             float valorDiaria,
-            Boolean alugado){
+            boolean alugado){
         this.codigoVeiculo = codigoVeiculo;
         this.nomeModelo = nomeModelo;
         this.montadora = montadora;
@@ -111,22 +111,26 @@ public abstract class Veiculo {
         this.valorDiaria = valorDiaria;
     }
 
-    public Boolean getAlugado() {
+    public boolean getAlugado() {
         return alugado;
     }
 
-    public void setAlugado(Boolean alugado) {
+    public void setAlugado(boolean alugado) {
         this.alugado = alugado;
     }
     
     abstract float calcularValorDiaria();
     
-    public Boolean estaAlugado(){
+    public boolean estaAlugado(){
         return getAlugado();
     }
     
-    public void alugar(){
-        setAlugado(true);
+    public boolean alugar(){
+        if(!getAlugado()){
+            setAlugado(true);
+            return true;
+        }
+        return false; //Carro indisponivel
     }
     
     public void devolver(){
