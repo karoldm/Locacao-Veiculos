@@ -28,6 +28,8 @@ public class AlugarCarro extends javax.swing.JDialog {
     Controller controller = new Controller();
     int id;
     
+    ArrayList<Locacao> locacoes = new ArrayList<>();
+    
     Veiculo veiculo;
     Seguro seguro;
     ArrayList<Seguro> seguros = new ArrayList<>();
@@ -49,15 +51,15 @@ o id gerado será 0 (zero), porém se existir um ou mais usuários na lista
 o código gerado será o código do último usuário da lista + 1. A lógica se
 aplica aos outros códigos (veiculo, seguro, locação)*/
 
-        ArrayList<Locacao> locacoes = controller.getLocacoes();
-        if(!locacoes.isEmpty()) {
-            id = locacoes.get(locacoes.size()-1).getCodigoLocacao() + 1;
+        this.locacoes = controller.getLocacoes();
+        if(!this.locacoes.isEmpty()) {
+            this.id = this.locacoes.get(this.locacoes.size()-1).getCodigoLocacao() + 1;
         }
         else {
-            id = 0;
+            this.id = 0;
         }
         
-        TextIDLocacao.setText(Integer.toString(id));
+        TextIDLocacao.setText(Integer.toString(this.id));
         
         //Iniciando ComboBox
         for(Veiculo v: controller.getVeiculos()){
@@ -531,7 +533,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
             }
         });
 
-        ValorTotalSeguros.setText("0.00");
+        ValorTotalSeguros.setText("0,00");
 
         QuantidadeSeguros.setText("0");
 
@@ -541,6 +543,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
 
         LabelDataLocacao.setText("Data de Locação");
 
+        TextDiaLocacao.setText("DD");
         TextDiaLocacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TextDiaLocacao.setDisabledTextColor(new java.awt.Color(32, 32, 32));
         TextDiaLocacao.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -554,6 +557,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
             }
         });
 
+        TextMesLocacao.setText("MM");
         TextMesLocacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TextMesLocacao.setDisabledTextColor(new java.awt.Color(32, 32, 32));
         TextMesLocacao.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -567,6 +571,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
             }
         });
 
+        TextAnoLocacao.setText("AAAA");
         TextAnoLocacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TextAnoLocacao.setDisabledTextColor(new java.awt.Color(32, 32, 32));
         TextAnoLocacao.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -586,6 +591,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
 
         LabelDataDevolucao.setText("Data de Devolução");
 
+        TextDiaDevolucao.setText("DD");
         TextDiaDevolucao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TextDiaDevolucao.setDisabledTextColor(new java.awt.Color(32, 32, 32));
         TextDiaDevolucao.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -601,6 +607,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
 
         jLabel3.setText("-");
 
+        TextMesDevolucao.setText("MM");
         TextMesDevolucao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TextMesDevolucao.setDisabledTextColor(new java.awt.Color(32, 32, 32));
         TextMesDevolucao.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -616,6 +623,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
 
         jLabel4.setText("-");
 
+        TextAnoDevolucao.setText("AAAA");
         TextAnoDevolucao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         TextAnoDevolucao.setDisabledTextColor(new java.awt.Color(32, 32, 32));
         TextAnoDevolucao.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -638,7 +646,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
 
         ValorTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ValorTotal.setForeground(new java.awt.Color(229, 4, 4));
-        ValorTotal.setText("0.00");
+        ValorTotal.setText("0,00");
 
         ButtonConfirmData.setBackground(new java.awt.Color(32, 32, 32));
         ButtonConfirmData.setForeground(new java.awt.Color(255, 255, 255));
@@ -1074,6 +1082,59 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clearForm(){
+        TextIDCliente.setText("");
+        TextIDFuncionario.setText("");
+        TextNomeCartao.setText("");        
+        TextBandeiraCartao.setText("");        
+        TextNumCartao.setText("");
+        TextNomeCliente.setText("");
+        TextCPF.setText("");
+        TextRG.setText("");
+        TextCEP.setText("");
+        TextEndereco.setText("");
+        TextEmail.setText("");
+        TextCategoriaCNH.setText("");
+        TextNumeroCNH.setText("");
+        TextValidadeCNH.setText("");
+        CheckBoxClienteOuro.setSelected(false);    
+
+        TextIDSeguro.setText("");
+        TextNomeSeguro.setText("");
+        TextTipoSeguro.setText("");
+        TextValorSeguro.setText("");
+        TextDescricaoSeguro.setText("");
+
+        TextModelo.setText("");
+        TextMontadora.setText("");
+        TextCategoria.setText("");
+        TextValorDiaria.setText("");
+        TextAnoFabricacao.setText("");
+        TextAnoModelo.setText("");
+        TextPlaca.setText("");
+        
+        TextDiaLocacao.setText("DD");
+        TextMesLocacao.setText("MM");
+        TextAnoLocacao.setText("AAAA");
+        TextDiaDevolucao.setText("DD");
+        TextMesDevolucao.setText("MM");
+        TextAnoDevolucao.setText("AAAA");
+        
+        ValorTotal.setText("0,00");
+        ValorTotalSeguros.setText("0,00");
+        QuantidadeSeguros.setText("0");
+        
+        this.total = 0;
+        this.totalSeguros = 0;
+        this.dataDevolucao = null;
+        this.dataLocacao = null;
+        this.seguro = null;
+        this.veiculo = null;
+
+        this.id = this.locacoes.get(this.locacoes.size()-1).getCodigoLocacao() + 1;
+        TextIDLocacao.setText(Integer.toString(this.id));
+    }
+    
     private void TextPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPlacaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextPlacaActionPerformed
@@ -1185,10 +1246,13 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                     );
             
                     controller.addLocacao(l);
+                    locacoes.add(l);
                     
                     JOptionPane.showMessageDialog(this, "Locação finalizada."
                         + " Locação realizada com sucesso!",
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    clearForm();
                 }
                 else {
                     JOptionPane.showMessageDialog(this, "Funcionário não cadastrado."
@@ -1401,7 +1465,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                 } //if validDate
                 else {
                     JOptionPane.showMessageDialog(this, "Formato inválido."
-                        + "Dia, mês ou ano inserido são inválidos!",
+                        + " Dia, mês ou ano inserido são inválidos!",
                     "Atenção", JOptionPane.WARNING_MESSAGE);
                     TextDiaLocacao.setText("");
                     TextMesLocacao.setText("");
@@ -1412,7 +1476,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                 }
             } catch (NumberFormatException nfe){
                 JOptionPane.showMessageDialog(this, "Dados inválidos."
-                        + "Dia, mês e ano devem ser números inteiros!",
+                        + " Dia, mês e ano devem ser números inteiros!",
                     "Atenção", JOptionPane.WARNING_MESSAGE);
                     TextDiaLocacao.setText("");
                     TextMesLocacao.setText("");
@@ -1424,7 +1488,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         }
         else {
             JOptionPane.showMessageDialog(this, "Campos não preenchidos."
-                        + "Por favor preencha todos os campos de data!",
+                        + " Por favor preencha todos os campos de data!",
                     "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_ButtonConfirmDataActionPerformed

@@ -16,6 +16,7 @@ import utils.Utilidades;
 public class CadastrarCliente extends javax.swing.JDialog {
     Controller controller;
     int id;
+    ArrayList<Usuario> usuarios = new ArrayList<>();
     
     /**
      * Creates new form CadastrarCliente
@@ -32,15 +33,15 @@ o id gerado será 0 (zero), porém se existir um ou mais usuários na lista
 o código gerado será o código do último usuário da lista + 1. A lógica se
 aplica aos outros códigos (veiculo, seguro, locação)*/
 
-        ArrayList<Usuario> usuarios = controller.getUsuarios();
-        if(!usuarios.isEmpty()) {
-            id = usuarios.get(usuarios.size()-1).getCodigoUsuario() + 1;
+        this.usuarios = controller.getUsuarios();
+        if(!this.usuarios.isEmpty()) {
+            this.id = this.usuarios.get(this.usuarios.size()-1).getCodigoUsuario() + 1;
         }
         else {
-            id = 0;
+            this.id = 0;
         }
         
-        TextIDCliente.setText(Integer.toString(id));
+        TextIDCliente.setText(Integer.toString(this.id));
  
     }
 
@@ -445,6 +446,28 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clearForm(){
+        TextNome.setText("");
+        TextCPF.setText("");
+        TextRG.setText("");
+        TextCEP.setText("");
+        TextEndereco.setText("");
+        TextEmail.setText("");
+        TextNumeroCNH.setText("");
+        RadioButtonClienteOuro.setSelected(false);
+
+        TextDiaNascimento.setText("DD");
+        TextMesNascimento.setText("MM");        
+        TextAnoNascimento.setText("AAAA");
+
+        TextDiaCNH.setText("DD");
+        TextMesCNH.setText("MM");
+        TextAnoCNH.setText("AAAA");
+
+        this.id = this.usuarios.get(this.usuarios.size()-1).getCodigoUsuario() + 1;
+        TextIDCliente.setText(Integer.toString(this.id));
+    }
+    
     private void ButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -513,10 +536,13 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                     clienteOuro);
 
                 controller.addUsuario(f);
+                this.usuarios.add(f);
                 
                 JOptionPane.showMessageDialog(this, "Cadastro realizado."
                         + " Cliente cadastrado com sucesso!",
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                
+                clearForm();
 
                 } catch(NumberFormatException nfe){
                     System.out.println(nfe);

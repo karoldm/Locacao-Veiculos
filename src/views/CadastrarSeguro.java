@@ -14,6 +14,7 @@ import utils.Utilidades;
 public class CadastrarSeguro extends javax.swing.JDialog {
     Controller controller = new Controller();
     int id;
+    ArrayList<Seguro> seguros  = new ArrayList<>();
     /**
      * Creates new form CadastrarSeguro
      */
@@ -27,15 +28,15 @@ o id gerado será 0 (zero), porém se existir um ou mais usuários na lista
 o código gerado será o código do último usuário da lista + 1. A lógica se
 aplica aos outros códigos (veiculo, seguro, locação)*/
 
-        ArrayList<Seguro> seguros = controller.getSeguros();
-        if(!seguros.isEmpty()) {
-            id = seguros.get(seguros.size()-1).getCodigoSeguro() + 1;
+        this.seguros = controller.getSeguros();
+        if(!this.seguros.isEmpty()) {
+            this.id = this.seguros.get(this.seguros.size()-1).getCodigoSeguro() + 1;
         }
         else {
-            id = 0;
+            this.id = 0;
         }
         
-        TextIDSeguro.setText(Integer.toString(id));
+        TextIDSeguro.setText(Integer.toString(this.id));
     }
 
     /**
@@ -212,6 +213,16 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clearForm(){
+        TextNome.setText("");
+        TextTipo.setText("");
+        TextDescricao.setText("");
+        TextValor.setText("");
+
+        this.id = this.seguros.get(this.seguros.size()-1).getCodigoSeguro() + 1;
+        TextIDSeguro.setText(Integer.toString(this.id));
+    }
+    
     private void ButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -237,10 +248,13 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                     Seguro s = new Seguro(id, nome, tipo, descricao, Float.parseFloat(valor));
                     
                     controller.addSeguro(s);
+                    this.seguros.add(s);
 
                     JOptionPane.showMessageDialog(this, "Cadastro realizado."
                         + " Seguro cadastrado com sucesso!",
                         "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    clearForm();
 
                 } catch(NumberFormatException nfe){
                     System.out.println(nfe);

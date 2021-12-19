@@ -16,6 +16,8 @@ import utils.Utilidades;
 public class CadastrarCarro extends javax.swing.JDialog {
     Controller controller;
     int id;
+    ArrayList<Veiculo> veiculos = new ArrayList<>();
+    
     /**
      * Creates new form CadastrarCarro
      */
@@ -31,14 +33,14 @@ o id gerado será 0 (zero), porém se existir um ou mais usuários na lista
 o código gerado será o código do último usuário da lista + 1. A lógica se
 aplica aos outros códigos (veiculo, seguro, locação)*/
 
-        ArrayList<Veiculo> veiculos = controller.getVeiculos();
-        if(!veiculos.isEmpty()) {
-            id = veiculos.get(veiculos.size()-1).getCodigoVeiculo() + 1;
+        this.veiculos = controller.getVeiculos();
+        if(!this.veiculos.isEmpty()) {
+            this.id = this.veiculos.get(this.veiculos.size()-1).getCodigoVeiculo() + 1;
         }
         else {
-            id = 0;
+            this.id = 0;
         }
-        TextIDCarro.setText(Integer.toString(id));
+        TextIDCarro.setText(Integer.toString(this.id));
     }
 
     /**
@@ -334,6 +336,21 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clearForm(){
+        TextModelo.setText("");
+        TextMontadora.setText("");
+        TextCategoria.setText("");
+        TextValorFipe.setText("");
+        TextAnoFabricacao.setText("");
+        TextAnoModelo.setText("");      
+        TextPlaca.setText("");        
+        TextTaxaEstadual.setText("");        
+        TextTaxaFederal.setText("");       
+
+        this.id = this.veiculos.get(this.veiculos.size()-1).getCodigoVeiculo() + 1;
+        TextIDCarro.setText(Integer.toString(this.id));
+    }
+    
     private void ButtonCofirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCofirmActionPerformed
         // TODO add your handling code here:
         String modelo = TextModelo.getText();
@@ -393,10 +410,13 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                     );
                 }
                 controller.addVeiculo(v);
+                this.veiculos.add(v);
                 
                 JOptionPane.showMessageDialog(this, "Cadastro realizado."
                         + " Veículo cadastrado com sucesso!",
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                
+                clearForm();
 
                 } catch(NumberFormatException nfe){
                     System.out.println(nfe);
@@ -409,7 +429,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
             } //if validDate
             else {
                 JOptionPane.showMessageDialog(this, "Data inválida."
-                        + " Dia, mês ou ano inserido são inválidos!",
+                        + " Ano de fabricação ou do modelo inserido são inválidos!",
                     "Atenção", JOptionPane.WARNING_MESSAGE);
             }
         } //if hasNull
