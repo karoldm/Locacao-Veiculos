@@ -1,5 +1,5 @@
 
-package Models;
+package models;
 
 import java.util.Calendar;
 
@@ -11,7 +11,7 @@ public class Cliente extends Usuario{
     protected String categoriaCNH;
     protected String numeroCNH;
     protected Calendar validadeCNH;
-    protected Boolean clienteOuro;
+    protected boolean clienteOuro;
     
     public Cliente(int codigoUsuario,
             String nome,
@@ -24,7 +24,7 @@ public class Cliente extends Usuario{
             String categoriaCNH,
             String numeroCNH,
             Calendar validadeCNH,
-            Boolean clienteOuro){
+            boolean clienteOuro){
         super(codigoUsuario, nome, cpf, rg, dataNascimento, endereco, cep, email);
         this.categoriaCNH = categoriaCNH;
         this.numeroCNH = numeroCNH;
@@ -56,11 +56,11 @@ public class Cliente extends Usuario{
         this.validadeCNH = validadeCNH;
     }
 
-    public Boolean getClienteOuro() {
+    public boolean getClienteOuro() {
         return clienteOuro;
     }
 
-    public void setClienteOuro(Boolean clienteOuro) {
+    public void setClienteOuro(boolean clienteOuro) {
         this.clienteOuro = clienteOuro;
     }
     

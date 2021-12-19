@@ -1,5 +1,5 @@
 
-package Models;
+package models;
 
 /**
  *
@@ -10,7 +10,7 @@ public class Cartao extends Pagamento{
     private String bandeira;
     private String numero;
     
-    public Cartao(String nome, String baneira, String numero){
+    public Cartao(String nome, String bandeira, String numero){
         super("Cartão");
         this.nome = nome;
         this.bandeira = bandeira;

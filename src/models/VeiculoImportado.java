@@ -1,5 +1,5 @@
 
-package Models;
+package models;
 
 /**
  *
@@ -17,8 +17,6 @@ public class VeiculoImportado extends Veiculo{
             String placa,
             String categoria,
             float valorFipe,
-            float valorDiaria,
-            Boolean alugado,
             float taxaImpostoEstadual,
             float taxaImpostoFederal){
         super(codigoVeiculo, 
@@ -28,11 +26,10 @@ public class VeiculoImportado extends Veiculo{
               anoModelo,
               placa,
               categoria,
-              valorFipe, 
-              valorDiaria,
-              alugado);
+              valorFipe);
         this.taxaImpostoEstadual = taxaImpostoEstadual;
         this.taxaImpostoFederal = taxaImpostoFederal;
+       
     }
 
     public float getTaxaImpostoEstadual() {
@@ -53,7 +50,9 @@ public class VeiculoImportado extends Veiculo{
     
     @Override
     public float calcularValorDiaria(){
-        return 0;
+        return this.getValorFipe() 
+                + getTaxaImpostoEstadual() 
+                + getTaxaImpostoFederal();
     }
     
     @Override

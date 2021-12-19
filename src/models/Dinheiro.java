@@ -1,11 +1,11 @@
 
-package Models;
+package models;
 
 /**
  *
  * @author karolyne Marques
  */
-public class Dinheiro extends Pagamento{
+public class Dinheiro extends Pagamento {
     
     public Dinheiro(){
         super("Dinheiro");

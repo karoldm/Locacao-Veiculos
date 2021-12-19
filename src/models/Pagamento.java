@@ -1,11 +1,13 @@
 
-package Models;
+package models;
+
+import java.io.Serializable;
 
 /**
  *
  * @author karolyne Marques
  */
-public abstract class Pagamento {
+public abstract class Pagamento implements Serializable {
     private String tipoPagamento;
     
     public Pagamento(String tipoPagamento){

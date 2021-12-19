@@ -1,11 +1,13 @@
 
-package Models;
+package models;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Karolyne Marques
  */
-public abstract class Veiculo {
+public abstract class Veiculo implements Serializable{
     protected int codigoVeiculo;
     protected String nomeModelo;
     protected String montadora;
@@ -24,9 +26,7 @@ public abstract class Veiculo {
             int anoModelo,
             String placa,
             String categoria,
-            float valorFipe,
-            float valorDiaria,
-            boolean alugado){
+            float valorFipe){
         this.codigoVeiculo = codigoVeiculo;
         this.nomeModelo = nomeModelo;
         this.montadora = montadora;
@@ -35,8 +35,8 @@ public abstract class Veiculo {
         this.placa = placa;
         this.categoria = categoria;
         this.valorFipe = valorFipe;
-        this.valorDiaria = valorDiaria;
-        this.alugado = alugado;
+        this.alugado = false;
+      
     }
 
     public int getCodigoVeiculo() {
@@ -104,7 +104,7 @@ public abstract class Veiculo {
     }
 
     public float getValorDiaria() {
-        return valorDiaria;
+        return this.calcularValorDiaria();
     }
 
     public void setValorDiaria(float valorDiaria) {

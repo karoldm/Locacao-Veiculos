@@ -1,36 +1,42 @@
 
-package Models;
+package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import utils.Utilidades;
 
 /**
  *
  * @author karolyne Marques
  */
-public class Locacao {
+public class Locacao implements Serializable{
     private int codigoLocacao;
     private int codigoCliente;
     private int codigoFuncionario;
+    private Veiculo veiculoLocado;
     private Calendar dataLocacao;
     private Calendar dataDevolucao;
     private float valorTotal;
     private Pagamento formaPagamento;
     private ArrayList<Seguro> segurosContratados;
-    private Boolean finalizada;
+    private boolean finalizada;
     
     public Locacao(int codigoLocacao,
             int codigoCliente,
             int codigoFuncionario,
+            Veiculo veiculoLocado,
             Calendar dataLocacao,
             Calendar dataDevolucao,
             float valorTotal,
             Pagamento formaPagamento,
             ArrayList<Seguro> segurosContratados,
-            Boolean finalizada){
+            boolean finalizada){
         this.codigoLocacao = codigoLocacao;
         this.codigoCliente = codigoCliente;
         this.codigoFuncionario = codigoFuncionario;
+        this.veiculoLocado = veiculoLocado;
         this.dataLocacao = dataLocacao;
         this.dataDevolucao = dataDevolucao;
         this.valorTotal = valorTotal;
@@ -38,6 +44,14 @@ public class Locacao {
         this.segurosContratados = segurosContratados;
         this.finalizada = finalizada;
         
+    }
+
+    public Veiculo getVeiculoLocado() {
+        return veiculoLocado;
+    }
+
+    public void setVeiculoLocado(Veiculo veiculoLocado) {
+        this.veiculoLocado = veiculoLocado;
     }
 
     public int getCodigoLocacao() {
@@ -104,25 +118,39 @@ public class Locacao {
         this.segurosContratados = segurosContratados;
     }
 
-    public Boolean getFinalizada() {
+    public boolean getFinalizada() {
         return finalizada;
     }
 
-    public void setFinalizada(Boolean finalizada) {
+    public void setFinalizada(boolean finalizada) {
         this.finalizada = finalizada;
     }
     
     public float calcularValorTotal(){
-        return 0;
+        float diaria = getVeiculoLocado().getValorDiaria(); 
+        
+        long diasAlugados = Utilidades.daysBetween(getDataLocacao(), getDataDevolucao());
+
+        float valorSeguros = 0;
+        
+        for(Seguro s: segurosContratados){
+            valorSeguros += s.getValor();
+        }
+        
+        return (diaria*diasAlugados)+valorSeguros;
     }
     
-    public Boolean possuiSeguro(){
+    public boolean possuiSeguro(){
         return getSegurosContratados().size() > 0;
     }
     
-    public Boolean verificarAtraso(){
+    public boolean verificarAtraso(){
         Calendar today = Calendar.getInstance();
-        return today == getDataDevolucao();
+        
+        long atraso = Utilidades.daysBetween(getDataDevolucao(), today);
+        
+        //se atraso <= 0 então já passou o dia da devolução, return true
+        return (atraso <= 0);
     }
     
     private String toStringSeguros(){

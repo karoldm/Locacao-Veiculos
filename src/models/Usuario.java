@@ -1,13 +1,14 @@
 
-package Models;
+package models;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  *
  * @author karolyne Marques
  */
-public class Usuario {
+public class Usuario implements Serializable{
     protected int codigoUsuario;
     protected String nome;
     protected String cpf;
