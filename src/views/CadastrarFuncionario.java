@@ -93,6 +93,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         TextAnoAdmissao = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Funcionário");
         setResizable(false);
 
         PanelCadastrarFun.setBackground(new java.awt.Color(255, 255, 255));

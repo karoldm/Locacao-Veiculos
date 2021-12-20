@@ -89,6 +89,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         TextAnoNascimento = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Cliente");
         setResizable(false);
 
         PanelCadastrarCliente.setBackground(new java.awt.Color(255, 255, 255));

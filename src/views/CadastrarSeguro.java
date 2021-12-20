@@ -68,6 +68,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Seguro");
 
         PanelCadastrarSeguro.setBackground(new java.awt.Color(255, 255, 255));
 
