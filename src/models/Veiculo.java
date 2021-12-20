@@ -126,7 +126,7 @@ public abstract class Veiculo implements Serializable{
     }
     
     public boolean alugar(){
-        if(!getAlugado()){
+        if(getAlugado() == false){
             setAlugado(true);
             return true;
         }
@@ -147,7 +147,8 @@ public abstract class Veiculo implements Serializable{
                 + "\nPlaca do Veículo: " + getPlaca()
                 + "\nCategoria: " + getCategoria()
                 + "\nValor do Fipe: " + getValorFipe()
-                + "\nValor da Diária: " + getValorDiaria();
+                + "\nValor da Diária: " + getValorDiaria()
+                + "\nEstá Augado? " + (getAlugado()?"Sim":"Não");
        
     }
 }

@@ -163,6 +163,10 @@ public class Locacao implements Serializable{
         return seguros;
     }
     
+    public void finalizar(){
+        setFinalizada(true);
+    }
+    
     @Override
     public String toString(){
         return "\nCódigo de Locação: " + getCodigoLocacao()

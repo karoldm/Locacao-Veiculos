@@ -9,6 +9,7 @@ import models.Veiculo;
 import database.Arquivos;
 
 import java.util.ArrayList;
+import models.Cliente;
 
 /**
  *
@@ -84,6 +85,16 @@ public class Controller {
         this.seguros = Arquivos.readSeguros();
         this.seguros.add(data);
         Arquivos.writeSeguros(this.seguros);
+    }
+    
+    public Cliente getClienteByCodigo(int id){
+        this.usuarios = Arquivos.readUsuarios();
+        for(Usuario u: this.usuarios){
+            if(u instanceof Cliente && u.getCodigoUsuario() == id){
+                return (Cliente)u;
+            }
+        }
+        return null;
     }
   
 }
