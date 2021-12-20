@@ -1223,16 +1223,10 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
             }
 
             try {
-            boolean funcionarioCadastrado = false;
-                for(Usuario u: controller.getUsuarios()){
-    
-                    if(u instanceof Funcionario
-                   && u.getCodigoUsuario() == Integer.parseInt(codigoFuncionario)){
-                        funcionarioCadastrado = true;
-                        break;
-                    }
-                }
-                if(funcionarioCadastrado){
+                Funcionario f;
+                f = controller.getFuncionarioByCodigo(Integer.parseInt(codigoFuncionario));
+            
+                if(f != null){
                     Locacao l = new Locacao(
                         this.id,
                         Integer.parseInt(codigoCliente),
@@ -1289,12 +1283,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         String id = ComboBoxSegurosDisp.getSelectedItem().toString();
         id = id.split(" - ")[1];
         
-        for(Seguro s: controller.getSeguros()){
-            if(id.equals(Integer.toString(s.getCodigoSeguro()))){
-                this.seguro = s;
-                break;
-            }
-        }
+        this.seguro = controller.getSeguroByCodigo(Integer.parseInt(id));
         
         TextIDSeguro.setText(Integer.toString(this.seguro.getCodigoSeguro()));
         TextNomeSeguro.setText(this.seguro.getNome());
@@ -1322,35 +1311,28 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         }
         else {
             try {
-                boolean clienteCadastrado = false;
-                for(Usuario u: controller.getUsuarios()){
-                    if(u instanceof Cliente
-                    && u.getCodigoUsuario() == Integer.parseInt(TextIDCliente.getText())){
-                        clienteCadastrado = true;
-                        Cliente c = (Cliente)u;
-                        TextNomeCliente.setText(c.getNome());
-                        TextCPF.setText(c.getCpf());
-                        TextRG.setText(c.getRg());
-                        TextCEP.setText(c.getCep());
-                        TextEndereco.setText(c.getEndereco());
-                        TextEmail.setText(c.getEmail());
-                        TextCategoriaCNH.setText(c.getCategoriaCNH());
-                        TextNumeroCNH.setText(c.getNumeroCNH());
-                        TextValidadeCNH.setText(c.getValidadeCNH().get(Calendar.DATE) 
-                            + "-" + c.getValidadeCNH().get(Calendar.MONTH)
-                            + "-" + c.getValidadeCNH().get(Calendar.YEAR));
-                        CheckBoxClienteOuro.setSelected(c.getClienteOuro());
-                        break;
-                    }
+                Cliente c = controller.getClienteByCodigo(Integer.parseInt(TextIDCliente.getText()));
+                if(c != null){
+                    TextNomeCliente.setText(c.getNome());
+                    TextCPF.setText(c.getCpf());
+                    TextRG.setText(c.getRg());
+                    TextCEP.setText(c.getCep());
+                    TextEndereco.setText(c.getEndereco());
+                    TextEmail.setText(c.getEmail());
+                    TextCategoriaCNH.setText(c.getCategoriaCNH());
+                    TextNumeroCNH.setText(c.getNumeroCNH());
+                    TextValidadeCNH.setText(c.getValidadeCNH().get(Calendar.DATE) 
+                        + "-" + c.getValidadeCNH().get(Calendar.MONTH)
+                        + "-" + c.getValidadeCNH().get(Calendar.YEAR));
+                    CheckBoxClienteOuro.setSelected(c.getClienteOuro());
+                    
+                    LabelErroIDCliente.setVisible(false);
                 }
-                if(clienteCadastrado == false){
+                else {
                     LabelErroIDCliente.setText("Cliente não cadastrado!");
                     LabelErroIDCliente.setVisible(true);
                     TextIDCliente.setText("");
                     TextIDCliente.requestFocus();
-                }
-                else {
-                    LabelErroIDCliente.setVisible(false);
                 }
             } catch(NumberFormatException nfe){
                     LabelErroIDCliente.setText("Entrada inválida!");
@@ -1366,12 +1348,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         String id = ComboBoxCarrosDisp.getSelectedItem().toString();
         id = id.split(" - ")[1];
        
-        for(Veiculo v: veiculos){
-            if(id.equals(Integer.toString(v.getCodigoVeiculo()))){
-                this.veiculo = v;
-                break;
-            }
-        }
+        this.veiculo = controller.getVeiculoByCodigo(Integer.parseInt(id));
         
         TextModelo.setText(this.veiculo.getNomeModelo());
         TextMontadora.setText(this.veiculo.getMontadora());

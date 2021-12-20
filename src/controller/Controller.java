@@ -10,6 +10,7 @@ import database.Arquivos;
 
 import java.util.ArrayList;
 import models.Cliente;
+import models.Funcionario;
 
 /**
  *
@@ -92,6 +93,46 @@ public class Controller {
         for(Usuario u: this.usuarios){
             if(u instanceof Cliente && u.getCodigoUsuario() == id){
                 return (Cliente)u;
+            }
+        }
+        return null;
+    }
+    
+    public Locacao getLocacaoByCodigo(int id){
+        this.locacoes = Arquivos.readLocacoes();
+        for(Locacao l: this.locacoes){
+            if(l.getCodigoLocacao() == id){
+                return l;
+            }
+        }
+        return null;
+    }
+    
+    public Funcionario getFuncionarioByCodigo(int id){
+        this.usuarios = Arquivos.readUsuarios();
+        for(Usuario u: this.usuarios){
+            if(u.getCodigoUsuario() == id){
+                return (Funcionario)u;
+            }
+        }
+        return null;
+    }
+    
+    public Seguro getSeguroByCodigo(int id){
+        this.seguros = Arquivos.readSeguros();
+        for(Seguro s: this.seguros){
+            if(s.getCodigoSeguro() == id){
+                return s;
+            }
+        }
+        return null;
+    }
+    
+    public Veiculo getVeiculoByCodigo(int id){
+        this.veiculos = Arquivos.readVeiculos();
+        for(Veiculo v: this.veiculos){
+            if(v.getCodigoVeiculo() == id){
+                return v;
             }
         }
         return null;

@@ -582,12 +582,7 @@ public class DevolucaoVeiculo extends javax.swing.JDialog {
         
         if(!id.equals("")){
         
-            for(Locacao l: locacoes){
-                if(l.getCodigoLocacao() == Integer.parseInt(id)){
-                    this.locacao = l;
-                    break;
-                }
-            }
+            this.locacao = controller.getLocacaoByCodigo(Integer.parseInt(id));
 
             if(this.locacao != null){
                 
