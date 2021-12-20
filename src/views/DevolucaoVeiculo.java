@@ -96,6 +96,11 @@ public class DevolucaoVeiculo extends javax.swing.JDialog {
                 TextIDLocacaoFocusLost(evt);
             }
         });
+        TextIDLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextIDLocacaoActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setForeground(new java.awt.Color(32, 32, 32));
 
@@ -540,6 +545,7 @@ public class DevolucaoVeiculo extends javax.swing.JDialog {
                         + " Veículo devolvido com sucesso!",
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
          
+         clearForm();
          
     }//GEN-LAST:event_ButtonCofirmActionPerformed
 
@@ -586,33 +592,41 @@ public class DevolucaoVeiculo extends javax.swing.JDialog {
 
             if(this.locacao != null){
                 
-                this.veiculo = locacao.getVeiculoLocado();
+                if(!this.locacao.getFinalizada()){
+                    this.veiculo = locacao.getVeiculoLocado();
                 
-                TextModelo.setText(this.veiculo.getNomeModelo());
-                TextMontadora.setText(this.veiculo.getMontadora());
-                TextCategoria.setText(this.veiculo.getCategoria());
-                TextValorFipe.setText(Float.toString(this.veiculo.getValorDiaria()));
-                TextAnoFabricacao.setText(Integer.toString(this.veiculo.getAnoFabricacao()));
-                TextAnoModelo.setText(Integer.toString(this.veiculo.getAnoModelo()));
-                TextPlaca.setText(this.veiculo.getPlaca());
-                
-                int idCliente = locacao.getCodigoCliente();
-                Cliente c = controller.getClienteByCodigo(idCliente);
-                
-                TextNome.setText(c.getNome());
-                TextCPF.setText(c.getCpf());
-                TextRG.setText(c.getRg());
-                TextCEP.setText(c.getCep());
-                TextEndereco.setText(c.getEndereco());
-                TextEmail.setText(c.getEmail());
-                TextCategoriaCNH.setText(c.getCategoriaCNH());
-                TextNumeroCNH.setText(c.getNumeroCNH());
-                TextValidadeCNH.setText(c.getValidadeCNH().get(Calendar.DATE) 
-                    + "-" + c.getValidadeCNH().get(Calendar.MONTH)
-                    + "-" + c.getValidadeCNH().get(Calendar.YEAR));
-                TextDataNascimento.setText(c.getDataNascimento().get(Calendar.DATE) 
-                    + "-" + c.getDataNascimento().get(Calendar.MONTH)
-                    + "-" + c.getDataNascimento().get(Calendar.YEAR));
+                    TextModelo.setText(this.veiculo.getNomeModelo());
+                    TextMontadora.setText(this.veiculo.getMontadora());
+                    TextCategoria.setText(this.veiculo.getCategoria());
+                    TextValorFipe.setText(Float.toString(this.veiculo.getValorDiaria()));
+                    TextAnoFabricacao.setText(Integer.toString(this.veiculo.getAnoFabricacao()));
+                    TextAnoModelo.setText(Integer.toString(this.veiculo.getAnoModelo()));
+                    TextPlaca.setText(this.veiculo.getPlaca());
+
+                    int idCliente = locacao.getCodigoCliente();
+                    Cliente c = controller.getClienteByCodigo(idCliente);
+
+                    TextNome.setText(c.getNome());
+                    TextCPF.setText(c.getCpf());
+                    TextRG.setText(c.getRg());
+                    TextCEP.setText(c.getCep());
+                    TextEndereco.setText(c.getEndereco());
+                    TextEmail.setText(c.getEmail());
+                    TextCategoriaCNH.setText(c.getCategoriaCNH());
+                    TextNumeroCNH.setText(c.getNumeroCNH());
+                    TextValidadeCNH.setText(c.getValidadeCNH().get(Calendar.DATE) 
+                        + "-" + c.getValidadeCNH().get(Calendar.MONTH)
+                        + "-" + c.getValidadeCNH().get(Calendar.YEAR));
+                    TextDataNascimento.setText(c.getDataNascimento().get(Calendar.DATE) 
+                        + "-" + c.getDataNascimento().get(Calendar.MONTH)
+                        + "-" + c.getDataNascimento().get(Calendar.YEAR));
+                }
+                else {
+                   JOptionPane.showMessageDialog(this, "Locação já finalizada!"
+                        + " Esta locação já foi finalizada.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+                TextIDLocacao.requestFocus(); 
+                }
             }
             else {
                 JOptionPane.showMessageDialog(this, "Locação não encontrada!"
@@ -632,6 +646,10 @@ public class DevolucaoVeiculo extends javax.swing.JDialog {
     private void TextPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPlacaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextPlacaActionPerformed
+
+    private void TextIDLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextIDLocacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextIDLocacaoActionPerformed
 
     /**
      * @param args the command line arguments
