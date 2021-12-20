@@ -2,7 +2,7 @@
 package views;
 
 
-import Controller.Controller;
+
 import javax.swing.JFrame;
 
 /**
@@ -12,14 +12,13 @@ import javax.swing.JFrame;
 public class Main {
 
     public static void main(String[] args) {
-        Home home = new Home();
+        Home home = new Home();;
         
         home.setVisible(true);
         home.setTitle("Aluguel de Veículos");
         
         //tela em full screen
         home.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
     }
     
 }

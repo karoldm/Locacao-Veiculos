@@ -30,6 +30,7 @@ public class Home extends javax.swing.JFrame {
         ButtonCadastrarFuncionario = new javax.swing.JButton();
         ButtonCadastrarSeguro = new javax.swing.JButton();
         ButtonRelatorios1 = new javax.swing.JButton();
+        ButtonDevolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -40,7 +41,7 @@ public class Home extends javax.swing.JFrame {
         PanelMenu.setLayout(new java.awt.GridBagLayout());
 
         PanelButtons.setBackground(new java.awt.Color(255, 255, 255));
-        PanelButtons.setLayout(new java.awt.GridLayout(6, 1, 0, 25));
+        PanelButtons.setLayout(new java.awt.GridLayout(7, 1, 0, 25));
 
         ButtonAlugarCarro.setBackground(new java.awt.Color(32, 32, 32));
         ButtonAlugarCarro.setForeground(new java.awt.Color(255, 255, 255));
@@ -156,6 +157,25 @@ public class Home extends javax.swing.JFrame {
         });
         PanelButtons.add(ButtonRelatorios1);
 
+        ButtonDevolver.setBackground(new java.awt.Color(32, 32, 32));
+        ButtonDevolver.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonDevolver.setText("Devolução de Veículo");
+        ButtonDevolver.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ButtonDevolver.setBorderPainted(false);
+        ButtonDevolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonDevolver.setFocusable(false);
+        ButtonDevolver.setMaximumSize(new java.awt.Dimension(300, 30));
+        ButtonDevolver.setMinimumSize(new java.awt.Dimension(100, 30));
+        ButtonDevolver.setPreferredSize(new java.awt.Dimension(300, 30));
+        ButtonDevolver.setRequestFocusEnabled(false);
+        ButtonDevolver.setRolloverEnabled(false);
+        ButtonDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonDevolverButtonVoltarMenuActionPerformed(evt);
+            }
+        });
+        PanelButtons.add(ButtonDevolver);
+
         PanelMenu.add(PanelButtons, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,7 +230,17 @@ public class Home extends javax.swing.JFrame {
 
     private void ButtonRelatorios1ButtonVoltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRelatorios1ButtonVoltarMenuActionPerformed
         // TODO add your handling code here:
+        Relatorios relatorios = new Relatorios(this, false);
+        relatorios.setVisible(true);
+        relatorios.setLocationRelativeTo(null);
     }//GEN-LAST:event_ButtonRelatorios1ButtonVoltarMenuActionPerformed
+
+    private void ButtonDevolverButtonVoltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDevolverButtonVoltarMenuActionPerformed
+        // TODO add your handling code here:
+        DevolucaoVeiculo devolucao = new DevolucaoVeiculo(this, true);
+        devolucao.setVisible(true);
+        devolucao.setLocationRelativeTo(null);
+    }//GEN-LAST:event_ButtonDevolverButtonVoltarMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,6 +283,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCadastrarCliente;
     private javax.swing.JButton ButtonCadastrarFuncionario;
     private javax.swing.JButton ButtonCadastrarSeguro;
+    private javax.swing.JButton ButtonDevolver;
     private javax.swing.JButton ButtonRelatorios1;
     private javax.swing.JPanel PanelButtons;
     private javax.swing.JPanel PanelMenu;

@@ -137,5 +137,29 @@ public class Controller {
         }
         return null;
     }
+    
+    public ArrayList<Funcionario> getFuncionarios(){
+        this.usuarios = Arquivos.readUsuarios();
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        
+        for(Usuario u: this.usuarios){
+            if(u instanceof Funcionario funcionario){
+                funcionarios.add(funcionario);
+            }
+        }
+        return funcionarios;
+    }
+    
+    public ArrayList<Cliente> getClientes(){
+        this.usuarios = Arquivos.readUsuarios();
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        
+        for(Usuario u: this.usuarios){
+            if(u instanceof Cliente cliente){
+                clientes.add(cliente);
+            }
+        }
+        return clientes;
+    }
   
 }
