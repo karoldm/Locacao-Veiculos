@@ -32,6 +32,26 @@ public class Controller {
         return this.veiculos;
     }
 
+    public void setUsuarios(ArrayList<Usuario> usuarios) {
+        this.usuarios = usuarios;
+        Arquivos.writeUsuarios(this.usuarios);
+    }
+
+    public void setLocacoes(ArrayList<Locacao> locacoes) {
+        this.locacoes = locacoes;
+        Arquivos.writeLocacoes(this.locacoes);
+    }
+
+    public void setVeiculos(ArrayList<Veiculo> veiculos) {
+        this.veiculos = veiculos;
+        Arquivos.writeVeiculos(this.veiculos);
+    }
+
+    public void setSeguros(ArrayList<Seguro> seguros) {
+        this.seguros = seguros;
+        Arquivos.writeSeguros(this.seguros);
+    }
+
     public ArrayList<Usuario> getUsuarios() {
         this.usuarios = Arquivos.readUsuarios();
         return this.usuarios;

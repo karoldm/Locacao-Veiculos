@@ -33,6 +33,7 @@ public class AlugarCarro extends javax.swing.JDialog {
     Veiculo veiculo;
     Seguro seguro;
     ArrayList<Seguro> seguros = new ArrayList<>();
+    ArrayList<Veiculo> veiculos = controller.getVeiculos();
     Calendar dataLocacao;
     Calendar dataDevolucao;
     float total = 0;
@@ -62,8 +63,8 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         TextIDLocacao.setText(Integer.toString(this.id));
         
         //Iniciando ComboBox
-        for(Veiculo v: controller.getVeiculos()){
-            if(v.estaAlugado() != true){
+        for(Veiculo v: veiculos){
+            if(v.estaAlugado() == false){
                 ComboBoxCarrosDisp.addItem(v.getNomeModelo() + " - " + v.getCodigoVeiculo());
             }
         } 
@@ -1242,8 +1243,14 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                         this.total,
                         pagamento,
                         this.seguros,
-                        true
+                        false
                     );
+                    
+                    this.veiculo.alugar();
+                    veiculos.removeIf(c -> 
+                            this.veiculo.getCodigoVeiculo() == c.getCodigoVeiculo());
+                    this.veiculos.add(this.veiculo);
+                    controller.setVeiculos(this.veiculos);
             
                     controller.addLocacao(l);
                     locacoes.add(l);
@@ -1359,7 +1366,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         String id = ComboBoxCarrosDisp.getSelectedItem().toString();
         id = id.split(" - ")[1];
        
-        for(Veiculo v: controller.getVeiculos()){
+        for(Veiculo v: veiculos){
             if(id.equals(Integer.toString(v.getCodigoVeiculo()))){
                 this.veiculo = v;
                 break;
