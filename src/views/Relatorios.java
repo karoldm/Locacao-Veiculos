@@ -461,33 +461,40 @@ public class Relatorios extends javax.swing.JDialog {
             int mes = Integer.parseInt(JOptionPane.showInputDialog("Insira o mês desejado utilizando"
                 + "a notação numérica [1-12]:"));
             
-            int i = 0;
-            for(Locacao l: controller.getLocacoesByMes(mes)){
-                for(Seguro s: l.getSegurosContratados()){
-                    segurosContratados += s.getNome() + ", ";
-                }
-                Object[] data = {
-                l.getCodigoLocacao(), 
-                l.getCodigoCliente(),
-                l.getCodigoFuncionario(),
-                l.getVeiculoLocado().getCodigoVeiculo(),
-                (l.getDataLocacao().get(Calendar.DATE)
-                        +"-"+l.getDataLocacao().get(Calendar.MONTH)
-                        +"-"+l.getDataLocacao().get(Calendar.YEAR)),
-                (l.getDataDevolucao().get(Calendar.DATE)
-                        +"-"+l.getDataDevolucao().get(Calendar.MONTH)
-                        +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
-                 String.format("%.2f", l.getValorTotal()),
-                l.getFormaPagamento().getTipoPagamento(),
-                segurosContratados,
-                (l.getFinalizada()?"Sim":"Não")
-                };
+            if(mes >=1 && mes <= 12){
+            
+                int i = 0;
+                for(Locacao l: controller.getLocacoesByMes(mes)){
+                    for(Seguro s: l.getSegurosContratados()){
+                        segurosContratados += s.getNome() + ", ";
+                    }
+                    Object[] data = {
+                    l.getCodigoLocacao(), 
+                    l.getCodigoCliente(),
+                    l.getCodigoFuncionario(),
+                    l.getVeiculoLocado().getCodigoVeiculo(),
+                    (l.getDataLocacao().get(Calendar.DATE)
+                            +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                            +"-"+l.getDataLocacao().get(Calendar.YEAR)),
+                    (l.getDataDevolucao().get(Calendar.DATE)
+                            +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                            +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
+                     String.format("%.2f", l.getValorTotal()),
+                    l.getFormaPagamento().getTipoPagamento(),
+                    segurosContratados,
+                    (l.getFinalizada()?"Sim":"Não")
+                    };
 
-                rows[i] = data;
-                i++;
+                    rows[i] = data;
+                    i++;
+                }
+                tableLocacao(rows, i);
             }
-            tableLocacao(rows, i);
-                    
+            else {
+            JOptionPane.showMessageDialog(this, "Dados inválidos!"
+                        + " Por favor insira um valor entre 1 e 12.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+            }           
         } catch(NumberFormatException  nfe){
             JOptionPane.showMessageDialog(this, "Dados inválidos!"
                         + " Por favor insira um valor numérico [1-12].",
@@ -973,36 +980,43 @@ public class Relatorios extends javax.swing.JDialog {
         try {
             int mes = Integer.parseInt(JOptionPane.showInputDialog("Insira o mês"
                 + "utilizando notação numérica [1-12]:"));
-            Funcionario f = controller.funcionarioMes(mes);
             
-            int i = 0;
-            
-            if(f != null){
-                
-                Object[] data = {
-                f.getCodigoUsuario(),
-                f.getNome(),
-                f.getCpf(),
-                f.getRg(),
-                f.getCep(),
-                f.getEndereco(),
-                (f.getDataNascimento().get(Calendar.DATE)
-                        +"-"+f.getDataNascimento().get(Calendar.MONTH)
-                        +"-"+f.getDataNascimento().get(Calendar.YEAR)),
-                f.getEmail(),
-                f.getPis(),
-                (f.getDataAdmissao().get(Calendar.DATE)
-                        +"-"+f.getDataAdmissao().get(Calendar.MONTH)
-                        +"-"+f.getDataAdmissao().get(Calendar.YEAR)),
-                 String.format("%.2f", f.getSalario())
-                 };
+            if(mes >= 1 && mes <= 12) {
+                Funcionario f = controller.funcionarioMes(mes);
 
-                rows[i] = data;
-                i++;
+                int i = 0;
+
+                if(f != null){
+
+                    Object[] data = {
+                    f.getCodigoUsuario(),
+                    f.getNome(),
+                    f.getCpf(),
+                    f.getRg(),
+                    f.getCep(),
+                    f.getEndereco(),
+                    (f.getDataNascimento().get(Calendar.DATE)
+                            +"-"+f.getDataNascimento().get(Calendar.MONTH)
+                            +"-"+f.getDataNascimento().get(Calendar.YEAR)),
+                    f.getEmail(),
+                    f.getPis(),
+                    (f.getDataAdmissao().get(Calendar.DATE)
+                            +"-"+f.getDataAdmissao().get(Calendar.MONTH)
+                            +"-"+f.getDataAdmissao().get(Calendar.YEAR)),
+                     String.format("%.2f", f.getSalario())
+                     };
+
+                    rows[i] = data;
+                    i++;
+                }
+
+                tableFuncionario(rows, i);
             }
-            
-            tableFuncionario(rows, i);
-                    
+            else {
+            JOptionPane.showMessageDialog(this, "Dados inválidos!"
+                        + " Por favor insira um valor entre 1 e 12.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+            }        
         } catch(NumberFormatException  nfe){
             JOptionPane.showMessageDialog(this, "Dados inválidos!"
                         + " Por favor insira um valor numérico inteiro.",
