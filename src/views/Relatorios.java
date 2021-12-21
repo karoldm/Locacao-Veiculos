@@ -332,9 +332,18 @@ public class Relatorios extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableVeiculo(Object rows[][], int QtdRows){
-        Object[] columns = {"Id", "Modelo", "Montadora", "Ano de Fabricação",
-        "Ano do Modelo", "Placa", "Categoria", "Valor Fipe", "Valor Diária", 
-        "Alugado", "Taxa Estadual", "Taxa Federal"}; 
+        Object[] columns = {"Código", 
+            "Modelo",
+            "Montadora",
+            "Ano de Fabricação",
+            "Ano do Modelo",
+            "Placa", 
+            "Categoria",
+            "Valor Fipe", 
+            "Valor Diária", 
+            "Alugado",
+            "Taxa Estadual",
+            "Taxa Federal"}; 
         
         DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
         
@@ -463,7 +472,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemLocacoesMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocacoesMesActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.locacoes.size()];
+        Object rows[][] = new Object[10][this.locacoes.size()];
         String segurosContratados = "";
         
         try {
@@ -541,7 +550,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemLocacoesRealizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocacoesRealizadasActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.locacoes.size()];
+        Object rows[][] = new Object[10][this.locacoes.size()];
         String segurosContratados = "";
         
         int i = 0;
@@ -549,26 +558,26 @@ public class Relatorios extends javax.swing.JDialog {
             for(Seguro s: l.getSegurosContratados()){
                 segurosContratados += s.getNome() + " ";
             }
-                Object[] data = {
-                l.getCodigoLocacao(), 
-                l.getCodigoCliente(),
-                l.getCodigoFuncionario(),
-                l.getVeiculoLocado().getCodigoVeiculo(),
-                (l.getDataLocacao().get(Calendar.DATE)
-                        +"-"+l.getDataLocacao().get(Calendar.MONTH)
-                        +"-"+l.getDataLocacao().get(Calendar.YEAR)),
-                (l.getDataDevolucao().get(Calendar.DATE)
-                        +"-"+l.getDataDevolucao().get(Calendar.MONTH)
-                        +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
-                 String.format("%.2f", l.getValorTotal()),
-                l.getFormaPagamento().getTipoPagamento(),
-                segurosContratados,
-                (l.getFinalizada()?"Sim":"Não")
-                };
-            
-                rows[i] = data;
-                i++;
-                segurosContratados = "";
+            Object[] data = {
+            l.getCodigoLocacao(), 
+            l.getCodigoCliente(),
+            l.getCodigoFuncionario(),
+            l.getVeiculoLocado().getCodigoVeiculo(),
+            (l.getDataLocacao().get(Calendar.DATE)
+                    +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                    +"-"+l.getDataLocacao().get(Calendar.YEAR)),
+            (l.getDataDevolucao().get(Calendar.DATE)
+                    +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                    +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
+             String.format("%.2f", l.getValorTotal()),
+            l.getFormaPagamento().getTipoPagamento(),
+            segurosContratados,
+            (l.getFinalizada()?"Sim":"Não")
+            };
+
+            rows[i] = data;
+            i++;
+            segurosContratados = "";
         }
         tableLocacao(rows, i);
     }//GEN-LAST:event_MenuItemLocacoesRealizadasActionPerformed
@@ -760,7 +769,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemLocacoesFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocacoesFinalizadasActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.locacoes.size()];
+        Object rows[][] = new Object[10][this.locacoes.size()];
         String segurosContratados = "";
         
         int i = 0;
@@ -795,7 +804,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemLocacoesNaoFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocacoesNaoFinalizadasActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.locacoes.size()];
+        Object rows[][] = new Object[10][this.locacoes.size()];
         String segurosContratados = "";
         
         int i = 0;
@@ -830,7 +839,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemLocacoesAtrasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocacoesAtrasoActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.locacoes.size()];
+        Object rows[][] = new Object[10][this.locacoes.size()];
         String segurosContratados = "";
         Calendar today = Calendar.getInstance();
         
@@ -866,7 +875,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemSegurosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSegurosCadastradosActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.seguros.size()];
+        Object rows[][] = new Object[5][this.seguros.size()];
         
         int i = 0;
         for(Seguro s: this.seguros){
@@ -886,7 +895,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemFunCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemFunCadastradosActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.usuarios.size()];
+        Object rows[][] = new Object[11][this.usuarios.size()];
         
         int i = 0;
         for(Funcionario f: controller.getFuncionarios()){
@@ -916,7 +925,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemClientesCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemClientesCadastradosActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.usuarios.size()];
+        Object rows[][] = new Object[11][this.usuarios.size()];
         
         int i = 0;
         for(Cliente c: controller.getClientes()){
@@ -946,7 +955,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemClienteLocAtrasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemClienteLocAtrasoActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][veiculos.size()];
+        Object rows[][] = new Object[11][veiculos.size()];
         
         Calendar today = Calendar.getInstance();
         
@@ -985,7 +994,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemFunMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemFunMesActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.locacoes.size()];
+        Object rows[][] = new Object[11][this.locacoes.size()];
         
         try {
             int mes = Integer.parseInt(JOptionPane.showInputDialog("Insira o mês"
@@ -1036,7 +1045,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemLocClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocClienteActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.locacoes.size()];
+        Object rows[][] = new Object[11][this.locacoes.size()];
         String segurosContratados = "";
         
         try {
@@ -1085,7 +1094,7 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemSegurosLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSegurosLocacaoActionPerformed
         // TODO add your handling code here:
-        Object rows[][] = new Object[12][this.locacoes.size()];
+        Object rows[][] = new Object[5][this.locacoes.size()];
         
         try {
             int idLocacao = Integer.parseInt(JOptionPane.showInputDialog("Insira Código"
