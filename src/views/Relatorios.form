@@ -199,6 +199,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios do M&#xea;s"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemFunMesActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -225,6 +228,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Loca&#xe7;&#xf5;es do Cliente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemLocClienteActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemClienteLocAtraso">
               <Properties>

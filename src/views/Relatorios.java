@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import models.Cliente;
 import models.Funcionario;
 import models.Usuario;
@@ -265,6 +266,11 @@ public class Relatorios extends javax.swing.JDialog {
 
         MenuItemFunMes.setBackground(new java.awt.Color(255, 255, 255));
         MenuItemFunMes.setText("Funcionários do Mês");
+        MenuItemFunMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemFunMesActionPerformed(evt);
+            }
+        });
         MenuFuncionarios.add(MenuItemFunMes);
 
         MenuBar.add(MenuFuncionarios);
@@ -282,6 +288,11 @@ public class Relatorios extends javax.swing.JDialog {
 
         MenuItemLocCliente.setBackground(new java.awt.Color(255, 255, 255));
         MenuItemLocCliente.setText("Locações do Cliente");
+        MenuItemLocCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemLocClienteActionPerformed(evt);
+            }
+        });
         MenuClientes.add(MenuItemLocCliente);
 
         MenuItemClienteLocAtraso.setBackground(new java.awt.Color(255, 255, 255));
@@ -443,6 +454,45 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemLocacoesMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocacoesMesActionPerformed
         // TODO add your handling code here:
+        Object rows[][] = new Object[12][this.locacoes.size()];
+        String segurosContratados = "";
+        
+        try {
+            int mes = Integer.parseInt(JOptionPane.showInputDialog("Insira o mês desejado utilizando"
+                + "a notação numérica [1-12]:"));
+            
+            int i = 0;
+            for(Locacao l: controller.getLocacoesByMes(mes)){
+                for(Seguro s: l.getSegurosContratados()){
+                    segurosContratados += s.getNome() + ", ";
+                }
+                Object[] data = {
+                l.getCodigoLocacao(), 
+                l.getCodigoCliente(),
+                l.getCodigoFuncionario(),
+                l.getVeiculoLocado().getCodigoVeiculo(),
+                (l.getDataLocacao().get(Calendar.DATE)
+                        +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                        +"-"+l.getDataLocacao().get(Calendar.YEAR)),
+                (l.getDataDevolucao().get(Calendar.DATE)
+                        +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                        +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
+                 String.format("%.2f", l.getValorTotal()),
+                l.getFormaPagamento().getTipoPagamento(),
+                segurosContratados,
+                (l.getFinalizada()?"Sim":"Não")
+                };
+
+                rows[i] = data;
+                i++;
+            }
+            tableLocacao(rows, i);
+                    
+        } catch(NumberFormatException  nfe){
+            JOptionPane.showMessageDialog(this, "Dados inválidos!"
+                        + " Por favor insira um valor numérico [1-12].",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_MenuItemLocacoesMesActionPerformed
 
     private void MenuItemVeiculosNacionaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemVeiculosNacionaisActionPerformed
@@ -644,7 +694,51 @@ public class Relatorios extends javax.swing.JDialog {
 
     private void MenuItemVeiculosLocClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemVeiculosLocClienteActionPerformed
         // TODO add your handling code here:
+        Object rows[][] = new Object[12][this.locacoes.size()];
+        String segurosContratados = "";
+        
+        try {
+            int idCliente = Integer.parseInt(JOptionPane.showInputDialog("Insira Código"
+                + "do Cliente:"));
+            
+            if(controller.getClienteByCodigo(idCliente) != null){
+                int i = 0;
+            for(Veiculo v: controller.getVeiculosLocadosCliente(idCliente)){
+                
+                Object[] data = {
+                v.getCodigoVeiculo(), 
+                v.getNomeModelo(),
+                v.getMontadora(),
+                v.getAnoFabricacao(),
+                v.getAnoModelo(),
+                v.getPlaca(),
+                v.getCategoria(),
+                String.format("%.2f", v.getValorFipe()),
+                String.format("%.2f", v.getValorDiaria()),
+                (v.getAlugado()?"Sim":"Não"),
+                (v instanceof VeiculoImportado 
+                    ? String.format("%.2f",((VeiculoImportado)v).getTaxaImpostoEstadual())
+                    : String.format("%.2f",((VeiculoNacional)v).getTaxaImpostoEstadual())),
+                (v instanceof VeiculoImportado 
+                    ? String.format("%.2f",((VeiculoImportado)v).getTaxaImpostoFederal())
+                    : "-")};
 
+                rows[i] = data;
+                i++;
+            }
+            tableLocacao(rows, i);
+            
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Cliente não cadastrado!"
+                        + " Não há nenhum cliente cadastrado com esse código.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+            }        
+        } catch(NumberFormatException  nfe){
+            JOptionPane.showMessageDialog(this, "Dados inválidos!"
+                        + " Por favor insira um valor numérico inteiro.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_MenuItemVeiculosLocClienteActionPerformed
 
     private void MenuItemLocacoesFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocacoesFinalizadasActionPerformed
@@ -871,6 +965,99 @@ public class Relatorios extends javax.swing.JDialog {
         
         tableCliente(rows, i);
     }//GEN-LAST:event_MenuItemClienteLocAtrasoActionPerformed
+
+    private void MenuItemFunMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemFunMesActionPerformed
+        // TODO add your handling code here:
+        Object rows[][] = new Object[12][this.locacoes.size()];
+        
+        try {
+            int mes = Integer.parseInt(JOptionPane.showInputDialog("Insira o mês"
+                + "utilizando notação numérica [1-12]:"));
+            Funcionario f = controller.funcionarioMes(mes);
+            
+            int i = 0;
+            
+            if(f != null){
+                
+                Object[] data = {
+                f.getCodigoUsuario(),
+                f.getNome(),
+                f.getCpf(),
+                f.getRg(),
+                f.getCep(),
+                f.getEndereco(),
+                (f.getDataNascimento().get(Calendar.DATE)
+                        +"-"+f.getDataNascimento().get(Calendar.MONTH)
+                        +"-"+f.getDataNascimento().get(Calendar.YEAR)),
+                f.getEmail(),
+                f.getPis(),
+                (f.getDataAdmissao().get(Calendar.DATE)
+                        +"-"+f.getDataAdmissao().get(Calendar.MONTH)
+                        +"-"+f.getDataAdmissao().get(Calendar.YEAR)),
+                 String.format("%.2f", f.getSalario())
+                 };
+
+                rows[i] = data;
+                i++;
+            }
+            
+            tableFuncionario(rows, i);
+                    
+        } catch(NumberFormatException  nfe){
+            JOptionPane.showMessageDialog(this, "Dados inválidos!"
+                        + " Por favor insira um valor numérico inteiro.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_MenuItemFunMesActionPerformed
+
+    private void MenuItemLocClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemLocClienteActionPerformed
+        // TODO add your handling code here:
+        Object rows[][] = new Object[12][this.locacoes.size()];
+        String segurosContratados = "";
+        
+        try {
+            int idCliente = Integer.parseInt(JOptionPane.showInputDialog("Insira Código"
+                + "do Cliente:"));
+            if(controller.getClienteByCodigo(idCliente) != null){
+                int i = 0;
+                for(Locacao l: controller.getLocacoesCliente(idCliente)){
+                    for(Seguro s: l.getSegurosContratados()){
+                        segurosContratados += s.getNome() + ", ";
+                    }
+
+                    Object[] data = {
+                    l.getCodigoLocacao(), 
+                    l.getCodigoCliente(),
+                    l.getCodigoFuncionario(),
+                    l.getVeiculoLocado().getCodigoVeiculo(),
+                    (l.getDataLocacao().get(Calendar.DATE)
+                            +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                            +"-"+l.getDataLocacao().get(Calendar.YEAR)),
+                    (l.getDataDevolucao().get(Calendar.DATE)
+                            +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                            +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
+                     String.format("%.2f", l.getValorTotal()),
+                    l.getFormaPagamento().getTipoPagamento(),
+                    segurosContratados,
+                    (l.getFinalizada()?"Sim":"Não")
+                    };
+
+                    rows[i] = data;
+                    i++;
+                }
+                tableLocacao(rows, i);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Cliente não cadastrado!"
+                        + " Não há nenhum cliente cadastrado com esse código.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+            }        
+        } catch(NumberFormatException  nfe){
+            JOptionPane.showMessageDialog(this, "Dados inválidos!"
+                        + " Por favor insira um valor numérico inteiro.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_MenuItemLocClienteActionPerformed
 
     /**
      * @param args the command line arguments
