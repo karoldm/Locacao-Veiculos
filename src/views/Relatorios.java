@@ -81,6 +81,7 @@ public class Relatorios extends javax.swing.JDialog {
         MenuItemVeiculosLocCliente = new javax.swing.JMenuItem();
         MenuSeguros = new javax.swing.JMenu();
         MenuItemSegurosCadastrados = new javax.swing.JMenuItem();
+        MenuItemSegurosLocacao = new javax.swing.JMenuItem();
         MenuFuncionarios = new javax.swing.JMenu();
         MenuItemFunCadastrados = new javax.swing.JMenuItem();
         MenuItemFunMes = new javax.swing.JMenuItem();
@@ -250,6 +251,14 @@ public class Relatorios extends javax.swing.JDialog {
             }
         });
         MenuSeguros.add(MenuItemSegurosCadastrados);
+
+        MenuItemSegurosLocacao.setText("Seguros por Locação");
+        MenuItemSegurosLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemSegurosLocacaoActionPerformed(evt);
+            }
+        });
+        MenuSeguros.add(MenuItemSegurosLocacao);
 
         MenuBar.add(MenuSeguros);
 
@@ -538,7 +547,7 @@ public class Relatorios extends javax.swing.JDialog {
         int i = 0;
         for(Locacao l: this.locacoes){
             for(Seguro s: l.getSegurosContratados()){
-                segurosContratados += s.getNome() + ", ";
+                segurosContratados += s.getNome() + " ";
             }
                 Object[] data = {
                 l.getCodigoLocacao(), 
@@ -559,6 +568,7 @@ public class Relatorios extends javax.swing.JDialog {
             
                 rows[i] = data;
                 i++;
+                segurosContratados = "";
         }
         tableLocacao(rows, i);
     }//GEN-LAST:event_MenuItemLocacoesRealizadasActionPerformed
@@ -1073,6 +1083,42 @@ public class Relatorios extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_MenuItemLocClienteActionPerformed
 
+    private void MenuItemSegurosLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSegurosLocacaoActionPerformed
+        // TODO add your handling code here:
+        Object rows[][] = new Object[12][this.locacoes.size()];
+        
+        try {
+            int idLocacao = Integer.parseInt(JOptionPane.showInputDialog("Insira Código"
+                + "da Locação:"));
+            if(controller.getLocacaoByCodigo(idLocacao) != null){
+                int i = 0;
+                for(Seguro s: controller.getSegurosLocacao(idLocacao)){
+                    
+                    Object[] data = {
+                    s.getCodigoSeguro(),
+                    s.getNome(),
+                    s.getTipo(),
+                    s.getDescricao(),
+                     String.format("%.2f", s.getValor())
+                    };
+
+                    rows[i] = data;
+                    i++;
+                }
+                tableSeguro(rows, i);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Locação não encontrada!"
+                        + " Não há nenhuma locação com esse código.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+            }        
+        } catch(NumberFormatException  nfe){
+            JOptionPane.showMessageDialog(this, "Dados inválidos!"
+                        + " Por favor insira um valor numérico inteiro.",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_MenuItemSegurosLocacaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1130,6 +1176,7 @@ public class Relatorios extends javax.swing.JDialog {
     private javax.swing.JMenuItem MenuItemLocacoesNaoFinalizadas;
     private javax.swing.JMenuItem MenuItemLocacoesRealizadas;
     private javax.swing.JMenuItem MenuItemSegurosCadastrados;
+    private javax.swing.JMenuItem MenuItemSegurosLocacao;
     private javax.swing.JMenuItem MenuItemVeiculosAtraso;
     private javax.swing.JMenuItem MenuItemVeiculosCadastrados;
     private javax.swing.JMenuItem MenuItemVeiculosDisp;

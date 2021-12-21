@@ -238,4 +238,9 @@ public class Controller {
         if(max[0] == -1) return null;
         return getFuncionarioByCodigo(max[0]);
     }
+    
+    public ArrayList<Seguro> getSegurosLocacao(int id){
+        Locacao l = getLocacaoByCodigo(id);
+        return l.getSegurosContratados();
+    }
 }
