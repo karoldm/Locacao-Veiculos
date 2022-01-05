@@ -56,7 +56,7 @@ public final class Utilidades {
          return false;
      }
 
-     //função para verificar de data é válida e retornar ela em Calendar
+     //função para verificar de data é válida e retornar ela em formato Calendar
      public static Calendar getValidDate(String dia, String mes, String ano){
          int diaInt = Integer.parseInt(dia);
          int mesInt = Integer.parseInt(mes);
