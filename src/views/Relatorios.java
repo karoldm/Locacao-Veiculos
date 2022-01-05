@@ -833,6 +833,7 @@ public class Relatorios extends javax.swing.JDialog {
         Object rows[][] = new Object[12][this.locacoes.size()];
         String segurosContratados = "";
         Calendar today = Calendar.getInstance();
+        today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH)+1, today.get(Calendar.DATE));
         
         int i = 0;
         for(Locacao l: this.locacoes){

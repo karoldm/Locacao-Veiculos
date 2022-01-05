@@ -23,7 +23,7 @@ public final class Utilidades {
         int dayDevolucao =  CDevolucao.get(Calendar.DATE);
         int monthDevolucao = CDevolucao.get(Calendar.MONTH)+1;
         int yearDevolucao = CDevolucao.get(Calendar.YEAR);
-        
+
         String dateLocacao = (dayLocacao < 10 ?
                 "0" + Integer.toString(dayLocacao):
                 Integer.toString(dayLocacao))
@@ -86,7 +86,7 @@ public final class Utilidades {
          }
          
         Calendar date = Calendar.getInstance();
-        date.set(anoInt, mesInt-1, diaInt);
+        date.set(anoInt, mesInt, diaInt);
         
         return date;
      }
