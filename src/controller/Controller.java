@@ -112,7 +112,7 @@ public class Controller {
     public Funcionario getFuncionarioByCodigo(int id){
         this.usuarios = Arquivos.readUsuarios();
         for(Usuario u: this.usuarios){
-            if(u.getCodigoUsuario() == id){
+            if(u instanceof Funcionario && u.getCodigoUsuario() == id){
                 return (Funcionario)u;
             }
         }
