@@ -168,7 +168,7 @@ public class Controller {
         ArrayList<Locacao> locacoesMes = new ArrayList<>();
         
         for(Locacao l: this.locacoes){
-            if(l.getDataLocacao().get(Calendar.MONTH) == (mes-1)){
+            if(l.getDataLocacao().get(Calendar.MONTH) == (mes)){
                 locacoesMes.add(l);
             }
         }
