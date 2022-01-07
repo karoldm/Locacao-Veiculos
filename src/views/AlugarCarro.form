@@ -564,6 +564,7 @@
           </Properties>
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TextIDClienteFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextIDClienteActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="Separator02">

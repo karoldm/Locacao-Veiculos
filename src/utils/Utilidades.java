@@ -86,7 +86,7 @@ public final class Utilidades {
          }
          
         Calendar date = Calendar.getInstance();
-        date.set(anoInt, mesInt, diaInt);
+        date.set(anoInt, mesInt-1, diaInt);
         
         return date;
      }

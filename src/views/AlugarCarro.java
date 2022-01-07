@@ -210,6 +210,11 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                 TextIDClienteFocusLost(evt);
             }
         });
+        TextIDCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextIDClienteActionPerformed(evt);
+            }
+        });
 
         Separator02.setForeground(new java.awt.Color(32, 32, 32));
 
@@ -1051,16 +1056,14 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                             .addComponent(LabelBandeiraCartao)
                             .addComponent(TextBandeiraCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LabelNumCartao)
-                            .addComponent(TextNumCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20))
-                    .addGroup(PanelAlugarCarroLayout.createSequentialGroup()
-                        .addGroup(PanelAlugarCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(RadioButtonDinheiro)
-                            .addComponent(RadioButtonCartao)
-                            .addComponent(LabelPagamento)
-                            .addComponent(ButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ButtonAlugarCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                            .addComponent(TextNumCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PanelAlugarCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(RadioButtonDinheiro)
+                        .addComponent(RadioButtonCartao)
+                        .addComponent(LabelPagamento)
+                        .addComponent(ButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonAlugarCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1322,7 +1325,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
                     TextCategoriaCNH.setText(c.getCategoriaCNH());
                     TextNumeroCNH.setText(c.getNumeroCNH());
                     TextValidadeCNH.setText(c.getValidadeCNH().get(Calendar.DATE) 
-                        + "-" + c.getValidadeCNH().get(Calendar.MONTH)
+                        + "-" + (c.getValidadeCNH().get(Calendar.MONTH)+1)
                         + "-" + c.getValidadeCNH().get(Calendar.YEAR));
                     CheckBoxClienteOuro.setSelected(c.getClienteOuro());
                     
@@ -1353,7 +1356,7 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
         TextModelo.setText(this.veiculo.getNomeModelo());
         TextMontadora.setText(this.veiculo.getMontadora());
         TextCategoria.setText(this.veiculo.getCategoria());
-        TextValorDiaria.setText(Float.toString(this.veiculo.getValorDiaria()));
+        TextValorDiaria.setText(String.format("%.2f", this.veiculo.getValorDiaria()));
         TextAnoFabricacao.setText(Integer.toString(this.veiculo.getAnoFabricacao()));
         TextAnoModelo.setText(Integer.toString(this.veiculo.getAnoModelo()));
         TextPlaca.setText(this.veiculo.getPlaca());
@@ -1538,6 +1541,10 @@ aplica aos outros códigos (veiculo, seguro, locação)*/
     private void TextNomeCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNomeCartaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextNomeCartaoActionPerformed
+
+    private void TextIDClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextIDClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextIDClienteActionPerformed
 
     /**
      * @param args the command line arguments

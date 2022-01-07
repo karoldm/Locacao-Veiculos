@@ -483,10 +483,10 @@ public class Relatorios extends javax.swing.JDialog {
                     l.getCodigoFuncionario(),
                     l.getVeiculoLocado().getCodigoVeiculo(),
                     (l.getDataLocacao().get(Calendar.DATE)
-                            +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                            +"-"+(l.getDataLocacao().get(Calendar.MONTH)+1)
                             +"-"+l.getDataLocacao().get(Calendar.YEAR)),
                     (l.getDataDevolucao().get(Calendar.DATE)
-                            +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                            +"-"+(l.getDataDevolucao().get(Calendar.MONTH)+1)
                             +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
                      String.format("%.2f", l.getValorTotal()),
                     l.getFormaPagamento().getTipoPagamento(),
@@ -555,10 +555,10 @@ public class Relatorios extends javax.swing.JDialog {
                 l.getCodigoFuncionario(),
                 l.getVeiculoLocado().getCodigoVeiculo(),
                 (l.getDataLocacao().get(Calendar.DATE)
-                        +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                        +"-"+(l.getDataLocacao().get(Calendar.MONTH)+1)
                         +"-"+l.getDataLocacao().get(Calendar.YEAR)),
                 (l.getDataDevolucao().get(Calendar.DATE)
-                        +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                        +"-"+(l.getDataDevolucao().get(Calendar.MONTH)+1)
                         +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
                  String.format("%.2f", l.getValorTotal()),
                 l.getFormaPagamento().getTipoPagamento(),
@@ -775,10 +775,10 @@ public class Relatorios extends javax.swing.JDialog {
                 l.getCodigoFuncionario(),
                 l.getVeiculoLocado().getCodigoVeiculo(),
                 (l.getDataLocacao().get(Calendar.DATE)
-                        +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                        +"-"+(l.getDataLocacao().get(Calendar.MONTH)+1)
                         +"-"+l.getDataLocacao().get(Calendar.YEAR)),
                 (l.getDataDevolucao().get(Calendar.DATE)
-                        +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                        +"-"+(l.getDataDevolucao().get(Calendar.MONTH)+1)
                         +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
                 String.format("%.2f", l.getValorTotal()),
                 l.getFormaPagamento().getTipoPagamento(),
@@ -810,10 +810,10 @@ public class Relatorios extends javax.swing.JDialog {
                 l.getCodigoFuncionario(),
                 l.getVeiculoLocado().getCodigoVeiculo(),
                 (l.getDataLocacao().get(Calendar.DATE)
-                        +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                        +"-"+(l.getDataLocacao().get(Calendar.MONTH)+1)
                         +"-"+l.getDataLocacao().get(Calendar.YEAR)),
                 (l.getDataDevolucao().get(Calendar.DATE)
-                        +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                        +"-"+(l.getDataDevolucao().get(Calendar.MONTH)+1)
                         +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
                  String.format("%.2f", l.getValorTotal()),
                 l.getFormaPagamento().getTipoPagamento(),
@@ -833,7 +833,7 @@ public class Relatorios extends javax.swing.JDialog {
         Object rows[][] = new Object[12][this.locacoes.size()];
         String segurosContratados = "";
         Calendar today = Calendar.getInstance();
-        today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH)+1, today.get(Calendar.DATE));
+        today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DATE));
         
         int i = 0;
         for(Locacao l: this.locacoes){
@@ -847,10 +847,10 @@ public class Relatorios extends javax.swing.JDialog {
                 l.getCodigoFuncionario(),
                 l.getVeiculoLocado().getCodigoVeiculo(),
                 (l.getDataLocacao().get(Calendar.DATE)
-                        +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                        +"-"+(l.getDataLocacao().get(Calendar.MONTH)+1)
                         +"-"+l.getDataLocacao().get(Calendar.YEAR)),
                 (l.getDataDevolucao().get(Calendar.DATE)
-                        +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                        +"-"+(l.getDataDevolucao().get(Calendar.MONTH)+1)
                         +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
                  String.format("%.2f", l.getValorTotal()),
                 l.getFormaPagamento().getTipoPagamento(),
@@ -899,12 +899,12 @@ public class Relatorios extends javax.swing.JDialog {
                 f.getCep(),
                 f.getEndereco(),
                 (f.getDataNascimento().get(Calendar.DATE)
-                        +"-"+f.getDataNascimento().get(Calendar.MONTH)
+                        +"-"+(f.getDataNascimento().get(Calendar.MONTH)+1)
                         +"-"+f.getDataNascimento().get(Calendar.YEAR)),
                 f.getEmail(),
                 f.getPis(),
                 (f.getDataAdmissao().get(Calendar.DATE)
-                        +"-"+f.getDataAdmissao().get(Calendar.MONTH)
+                        +"-"+(f.getDataAdmissao().get(Calendar.MONTH)+1)
                         +"-"+f.getDataAdmissao().get(Calendar.YEAR)),
                  String.format("%.2f", f.getSalario())
             };
@@ -929,13 +929,13 @@ public class Relatorios extends javax.swing.JDialog {
                 c.getCep(),
                 c.getEndereco(),
                 (c.getDataNascimento().get(Calendar.DATE)
-                        +"-"+c.getDataNascimento().get(Calendar.MONTH)
+                        +"-"+(c.getDataNascimento().get(Calendar.MONTH)+1)
                         +"-"+c.getDataNascimento().get(Calendar.YEAR)),
                 c.getEmail(),
                 c.getCategoriaCNH(),
                 c.getNumeroCNH(),
                 (c.getValidadeCNH().get(Calendar.DATE)
-                        +"-"+c.getValidadeCNH().get(Calendar.MONTH)
+                        +"-"+(c.getValidadeCNH().get(Calendar.MONTH)+1)
                         +"-"+c.getValidadeCNH().get(Calendar.YEAR))
             };
 
@@ -966,13 +966,13 @@ public class Relatorios extends javax.swing.JDialog {
                 c.getCep(),
                 c.getEndereco(),
                 (c.getDataNascimento().get(Calendar.DATE)
-                        +"-"+c.getDataNascimento().get(Calendar.MONTH)
+                        +"-"+(c.getDataNascimento().get(Calendar.MONTH)+1)
                         +"-"+c.getDataNascimento().get(Calendar.YEAR)),
                 c.getEmail(),
                 c.getCategoriaCNH(),
                 c.getNumeroCNH(),
                 (c.getValidadeCNH().get(Calendar.DATE)
-                        +"-"+c.getValidadeCNH().get(Calendar.MONTH)
+                        +"-"+(c.getValidadeCNH().get(Calendar.MONTH)+1)
                         +"-"+c.getValidadeCNH().get(Calendar.YEAR))
                 };
             
@@ -1007,12 +1007,12 @@ public class Relatorios extends javax.swing.JDialog {
                     f.getCep(),
                     f.getEndereco(),
                     (f.getDataNascimento().get(Calendar.DATE)
-                            +"-"+f.getDataNascimento().get(Calendar.MONTH)
+                            +"-"+(f.getDataNascimento().get(Calendar.MONTH)+1)
                             +"-"+f.getDataNascimento().get(Calendar.YEAR)),
                     f.getEmail(),
                     f.getPis(),
                     (f.getDataAdmissao().get(Calendar.DATE)
-                            +"-"+f.getDataAdmissao().get(Calendar.MONTH)
+                            +"-"+(f.getDataAdmissao().get(Calendar.MONTH)+1)
                             +"-"+f.getDataAdmissao().get(Calendar.YEAR)),
                      String.format("%.2f", f.getSalario())
                      };
@@ -1056,10 +1056,10 @@ public class Relatorios extends javax.swing.JDialog {
                     l.getCodigoFuncionario(),
                     l.getVeiculoLocado().getCodigoVeiculo(),
                     (l.getDataLocacao().get(Calendar.DATE)
-                            +"-"+l.getDataLocacao().get(Calendar.MONTH)
+                            +"-"+(l.getDataLocacao().get(Calendar.MONTH)+1)
                             +"-"+l.getDataLocacao().get(Calendar.YEAR)),
                     (l.getDataDevolucao().get(Calendar.DATE)
-                            +"-"+l.getDataDevolucao().get(Calendar.MONTH)
+                            +"-"+(l.getDataDevolucao().get(Calendar.MONTH)+1)
                             +"-"+l.getDataDevolucao().get(Calendar.YEAR)),
                      String.format("%.2f", l.getValorTotal()),
                     l.getFormaPagamento().getTipoPagamento(),

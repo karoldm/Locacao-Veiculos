@@ -598,7 +598,7 @@ public class DevolucaoVeiculo extends javax.swing.JDialog {
                     TextModelo.setText(this.veiculo.getNomeModelo());
                     TextMontadora.setText(this.veiculo.getMontadora());
                     TextCategoria.setText(this.veiculo.getCategoria());
-                    TextValorFipe.setText(Float.toString(this.veiculo.getValorDiaria()));
+                    TextValorFipe.setText(String.format("%.2f", this.veiculo.getValorDiaria()));
                     TextAnoFabricacao.setText(Integer.toString(this.veiculo.getAnoFabricacao()));
                     TextAnoModelo.setText(Integer.toString(this.veiculo.getAnoModelo()));
                     TextPlaca.setText(this.veiculo.getPlaca());
@@ -615,10 +615,10 @@ public class DevolucaoVeiculo extends javax.swing.JDialog {
                     TextCategoriaCNH.setText(c.getCategoriaCNH());
                     TextNumeroCNH.setText(c.getNumeroCNH());
                     TextValidadeCNH.setText(c.getValidadeCNH().get(Calendar.DATE) 
-                        + "-" + c.getValidadeCNH().get(Calendar.MONTH)
+                        + "-" + (c.getValidadeCNH().get(Calendar.MONTH)+1)
                         + "-" + c.getValidadeCNH().get(Calendar.YEAR));
                     TextDataNascimento.setText(c.getDataNascimento().get(Calendar.DATE) 
-                        + "-" + c.getDataNascimento().get(Calendar.MONTH)
+                        + "-" + (c.getDataNascimento().get(Calendar.MONTH)+1)
                         + "-" + c.getDataNascimento().get(Calendar.YEAR));
                 }
                 else {
