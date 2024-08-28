@@ -13,7 +13,7 @@ import views.Home;
 public class Main {
 
     public static void main(String[] args) {
-        Home home = new Home();;
+        Home home = new Home();
         
         home.setVisible(true);
         home.setTitle("Aluguel de Veículos");
